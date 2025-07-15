@@ -1,14 +1,44 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+Project structure
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+| domain
+| └─ Person.kt
+| └─ PersonDummy.kt
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+| navigation
+| └─ NavGraph.kt
+| └─ NavigationItem.kt
+| └─ Screen.kt
+
+| presentation
+| ├─ components
+| │  └─ ActionButton.kt
+| │  └─ ActionRowButton.kt
+| │  └─ ChoiceChips.kt
+| │  └─ InfoTag.kt
+| │  └─ OptionsMenu.kt
+| ├─ profilecard
+| │  └─ ProfileCard.kt
+| ├─ screen
+| │ ├─ home
+| │ │   └─ HomeView.kt
+| │ ├─ profiledetail
+| │ │   └─ ProfileDetailView.kt
+| │ ├─ ChatView.kt
+| │ ├─ LikedView.kt
+| │ └─ ProfileView.kt
+| └─ MainView.kt
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+Logic:
+The app starts in MainView.kt, which sets up the scaffold layout and navigation.
+•	Navigation is defined in NavGraph.kt using a NavController.
+•	Users swipe cards (ProfileCard.kt) to trigger actions like Like, Reject, or View Profile.
+•	Taps and swipes are handled locally and trigger screen transitions through the NavController.
+
+Known Issues:
+•	No ViewModel or repository layers — local state is handled with remember { mutableStateOf(...) }.
+•	All profile data is static and defined in PersonDummy.kt.
+•	No networking or local database — everything runs in memory.
+•	Image placeholders are currently used instead of real photos.
+•	Swipe actions aren’t saved — state resets when the app restarts.
+•	The navigation logic is basic and may need improvements for deeper stacks or more screens.
