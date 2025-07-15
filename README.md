@@ -1,5 +1,6 @@
-Project structure
+### Project Structure
 
+```text
 | domain
 | └─ Person.kt
 | └─ PersonDummy.kt
@@ -29,6 +30,7 @@ Project structure
 | └─ MainView.kt
 
 
+
 Logic:
 The app starts in MainView.kt, which sets up the scaffold layout and navigation.
 •	Navigation is defined in NavGraph.kt using a NavController.
@@ -42,3 +44,4 @@ Known Issues:
 •	Image placeholders are currently used instead of real photos.
 •	Swipe actions aren’t saved — state resets when the app restarts.
 •	The navigation logic is basic and may need improvements for deeper stacks or more screens.
+```
